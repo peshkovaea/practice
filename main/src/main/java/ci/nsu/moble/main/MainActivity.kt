@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ci.nsu.moble.main.ui.theme.PracticeTheme
 
-// Карта цветов (исправляем дубликат Orange)
+// Карта цветов
 private val colorMap = mapOf(
     "Red" to Color.Red,
     "Orange" to Color(0xFFFFA500), // Оранжевый
@@ -29,13 +29,7 @@ private val colorMap = mapOf(
     "Blue" to Color.Blue,
     "Indigo" to Color(0xFF4B0082), // Индиго
     "Violet" to Color(0xFFEE82EE), // Фиолетовый
-    "Cyan" to Color.Cyan,
-    "Magenta" to Color.Magenta,
-    "Black" to Color.Black,
-    "White" to Color.White,
-    "Gray" to Color.Gray,
-    "DarkGray" to Color.DarkGray,
-    "LightGray" to Color.LightGray
+
 )
 
 class MainActivity : ComponentActivity() {
