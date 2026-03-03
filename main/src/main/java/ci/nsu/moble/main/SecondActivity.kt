@@ -64,23 +64,23 @@ class SecondActivity : ComponentActivity() {
 @Composable
 fun SecondActivityScreen() {
     // todo: create nav controller
-    val navController = rememberNavController()
+    val navController = rememberNavController()//управляет переходами
     //var selectedItem by remember { mutableStateOf(0) }
     val context = LocalContext.current
-    var receivedText by remember { mutableStateOf("") }
+    var receivedText by remember { mutableStateOf("") }//получает текст из mainActivity
     if (context is Activity) {
         receivedText = context.intent.getStringExtra("text_data") ?: "No text received"
     }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route
+    val currentRoute = navBackStackEntry?.destination?.route//определяет на каком экране находимся
 
     Scaffold(modifier = Modifier.fillMaxSize(), topBar = {
-        TopAppBar(
+        TopAppBar(//верхняяя панель
             title = { Text(receivedText) }, navigationIcon = {
                 IconButton(onClick = {
                     // TODO: create intent and start MainActivity
                     if (context is Activity) {
-                        context.finish()
+                        context.finish()// закрывает текущую активность и возвращает на предыдущий экран
                     }
                 }) {
                     Icon(
@@ -102,8 +102,8 @@ fun SecondActivityScreen() {
 
                 onClick = {
                     // TODO: navigate to home screen by navController
-                    navController.navigate(Screen.Home.route) {
-                        popUpTo(Screen.Home.route) {
+                    navController.navigate(Screen.Home.route) {//осуществляет переход на выбранный экран
+                        popUpTo(Screen.Home.route) {//управляет историей навигации(чтобы не создавать копии экранов)
                             inclusive = true
                         }
                         launchSingleTop = true
@@ -133,12 +133,12 @@ fun SecondActivityScreen() {
         }
     }) { innerPadding ->
         // TODO: create a nav graph with 3 screens
-        NavHost(
+        NavHost(//навигация
             navController = navController,
-            startDestination = Screen.Home.route,
+            startDestination = Screen.Home.route,//первый экран
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable(Screen.Home.route) {
+            composable(Screen.Home.route) {//связывает маршрут с функцией отрисовки
                 HomeScreen(
                     onNavigateToScreenOne = {
                         navController.navigate(Screen.ScreenOne.route)
@@ -163,7 +163,8 @@ fun SecondActivityScreen() {
     }
 }
 @Composable
-fun HomeScreen(onNavigateToScreenOne: () -> Unit) {
+fun HomeScreen(onNavigateToScreenOne: () -> Unit) {     //каждый экран получает функцию для перехода на следующий экран
+                                                        // при нажатии кнопки вызывается эта функция
     Column(
         modifier = Modifier
             .fillMaxSize()
